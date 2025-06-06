@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三年级中文复习材料（拼音版）</title>
+    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.14.1/dist/index.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background-color: #f0f9ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-image: linear-gradient(to bottom, #e6f7ff, #ffffff);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #4facfe 0%, #2a9df4 100%);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .pinyin-toggle {
+            margin-top: 15px;
+        }
+        .toggle-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        .section h2 {
+            color: #2a9df4;
+            border-bottom: 3px solid #a5d8ff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        .section h2 i {
+            margin-right: 12px;
+            background: #e3f2fd;
+            padding: 8px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2a9df4;
+        }
+        .exercise {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 4px solid #4facfe;
+            background-color: #f9f9f9;
+            border-radius: 0 8px 8px 0;
+        }
+        .exercise h3 {
+            color: #2a9df4;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .option {
+            background-color: #e6f7ff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid #b3e0ff;
+        }
+        .option:hover {
+            background-color: #b3e0ff;
+            transform: scale(1.05);
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        input[type="text"] {
+            padding: 8px 12px;
+            border: 2px solid #b3e0ff;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #4facfe;
+            outline: none;
+        }
+        .btn {
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #3a8bc8;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+        .correct {
+            background-color: #e6ffe6;
+            border: 2px solid #4caf50;
+        }
+        .incorrect {
+            background-color: #ffe6e6;
+            border: 2px solid #f44336;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .card {
+            background: linear-gradient(to bottom right, #e6f7ff, #ffffff);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #b3e0ff;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .card h4 {
+            color: #2a9df4;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .card ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+        .card li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-top: 20px;
+        }
+        .pinyin {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 0.85rem;
+            color: #e91e63;
+            font-weight: bold;
+            width: 100%;
+            text-align: left;
+            padding-left: 5px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        .ruby {
+            display: inline-block;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .ruby rt {
+            font-size: 0.7em;
+            color: #e91e63;
+        }
+        .sentence-pinyin {
+            font-size: 0.9rem;
+            color: #e91e63;
+            margin-top: 5px;
+            font-style: italic;
+            padding: 5px;
+            background: #fff9f9;
+            border-radius: 5px;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>三年级中文复习材料（拼音版）</h1>
+        <p>拼音辅助学习 - 包含词汇、语法和固定搭配练习</p>
+        <div class="pinyin-toggle">
+            <button class="toggle-btn" id="togglePinyin">显示拼音</button>
+        </div>
+    </div>
+
+    <!-- 词汇复习 -->
+    <div class="section">
+        <h2><i>📚</i> 词汇复习</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <h4>学校设施</h4>
+                <ul>
+                    <li><span class="pinyin">jiào xué lóu</span>教学楼(幢)</li>
+                    <li><span class="pinyin">tú shū guǎn</span>图书馆</li>
+                    <li><span class="pinyin">lǐ táng</span>礼堂</li>
+                    <li><span class="pinyin">cāo chǎng</span>操场</li>
+                    <li><span class="pinyin">tǐ yù guǎn</span>体育馆</li>
+                    <li><span class="pinyin">yóu yǒng chí</span>游泳池</li>
+                    <li><span class="pinyin">xiào yī shì</span>校医室</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>食物</h4>
+                <ul>
+                    <li><span class="pinyin">zhū ròu</span>猪肉</li>
+                    <li><span class="pinyin">niú ròu</span>牛肉</li>
+                    <li><span class="pinyin">jī ròu</span>鸡肉</li>
+                    <li><span class="pinyin">shā lā</span>沙拉</li>
+                    <li><span class="pinyin">bīng qí lín</span>冰淇淋</li>
+                    <li><span class="pinyin">qiǎo kè lì</span>巧克力</li>
+                    <li><span class="pinyin">tián pǐn</span>甜品</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>城市设施</h4>
+                <ul>
+                    <li><span class="pinyin">yóu jú</span>邮局</li>
+                    <li><span class="pinyin">yín háng</span>银行</li>
+                    <li><span class="pinyin">zhěn suǒ</span>诊所</li>
+                    <li><span class="pinyin">gōng yuán</span>公园</li>
+                    <li><span class="pinyin">chē zhàn</span>车站</li>
+                    <li><span class="pinyin">gòu wù guǎng chǎng</span>购物广场</li>
+                    <li><span class="pinyin">jiào táng</span>教堂</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4>文具</h4>
+                <ul>
+                    <li><span class="pinyin">qiān bǐ</span>铅笔</li>
+                    <li><span class="pinyin">chǐ zi</span>尺子</li>
+                    <li><span class="pinyin">xiàng pí</span>橡皮</li>
+                    <li><span class="pinyin">liàn xí běn</span>练习本</li>
+                    <li><span class="pinyin">rì jì běn</span>日记本</li>
+                    <li><span class="pinyin">wén jù hé</span>文具盒</li>
+                    <li><span class="pinyin">jì suàn qì</span>计算器</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 固定搭配练习 -->
+    <div class="section">
+        <h2><i>🔗</i> 固定搭配练习</h2>
+        
+        <div class="exercise">
+            <h3>练习 1: 用固定搭配完成句子</h3>
+            <div class="input-group">
+                <p>1. 学校的老师都<span class="blank">______</span>很好。</p>
+                <p class="sentence-pinyin">xué xiào de lǎo shī dōu ______ hěn hǎo。</p>
+                <input type="text" id="q1" placeholder="填写固定搭配">
+            </div>
+            
+            <div class="input-group">
+                <p>2. 我<span class="blank">______</span>物理不感兴趣。</p>
+                <p class="sentence-pinyin">wǒ ______ wù lǐ bù gǎn xìng qù。</p>
+                <input type="text" id="q2" placeholder="填写固定搭配">
+            </div>
+            
+            <div class="input-group">
+                <p>3. 市场上卖<span class="blank">______</span>的蔬菜。</p>
+                <p class="sentence-pinyin">shì chǎng shàng mài ______ de shū cài。</p>
+                <input type="text" id="q3" placeholder="填写固定搭配">
+            </div>
+            
+            <div class="input-group">
+                <p>4. 我平时<span class="blank">______</span>晚饭以后做作业。</p>
+                <p class="sentence-pinyin">wǒ píng shí ______ wǎn fàn yǐ hòu zuò zuò yè。</p>
+                <input type="text" id="q4" placeholder="填写固定搭配">
+            </div>
+            
+            <button class="btn" onclick="checkPhrases()">检查答案</button>
+            
+            <div id="feedback-phrases" class="feedback"></div>
+        </div>
+    </div>
+
+    <!-- 语法练习 -->
+    <div class="section">
+        <h2><i>📝</i> 语法练习</h2>
+        
+        <div class="exercise">
+            <h3>练习 2: 选择正确的语法结构</h3>
+            <p>1. 弟弟的哭声把我______了。</p>
+            <p class="sentence-pinyin">dì di de kū shēng bǎ wǒ ______ le。</p>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'q5')">吵醒</div>
+                <div class="option" onclick="selectOption(this, 'q5')">醒了</div>
+                <div class="option" onclick="selectOption(this, 'q5')">吵了</div>
+                <div class="option" onclick="selectOption(this, 'q5')">醒吵</div>
+            </div>
+            <input type="text" id="q5" placeholder="你的答案" readonly>
+            
+            <p>2. 我的自行车______哥哥骑走了。</p>
+            <p class="sentence-pinyin">wǒ de zì xíng chē ______ gē ge qí zǒu le。</p>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'q6')">把</div>
+                <div class="option" onclick="selectOption(this, 'q6')">被</div>
+                <div class="option" onclick="selectOption(this, 'q6')">给</div>
+                <div class="option" onclick="selectOption(this, 'q6')">让</div>
+            </div>
+            <input type="text" id="q6" placeholder="你的答案" readonly>
+            
+            <p>3. 你一进校门就可以______图书馆。</p>
+            <p class="sentence-pinyin">nǐ yī jìn xiào mén jiù kě yǐ ______ tú shū guǎn。</p>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'q7')">看见</div>
+                <div class="option" onclick="selectOption(this, 'q7')">看了</div>
+                <div class="option" onclick="selectOption(this, 'q7')">看到</div>
+                <div class="option" onclick="selectOption(this, 'q7')">看见过</div>
+            </div>
+            <input type="text" id="q7" placeholder="你的答案" readonly>
+            
+            <button class="btn" onclick="checkGrammar()">检查答案</button>
+            
+            <div id="feedback-grammar" class="feedback"></div>
+        </div>
+    </div>
+
+    <!-- 量词练习 -->
+    <div class="section">
+        <h2><i>🔢</i> 量词练习</h2>
+        
+        <div class="exercise">
+            <h3>练习 3: 选择合适的量词</h3>
+            <div class="input-group">
+                <p>1. 一<span class="blank">______</span>铅笔</p>
+                <p class="sentence-pinyin">yī ______ qiān bǐ</p>
+                <input type="text" id="q8" placeholder="填写量词">
+            </div>
+            
+            <div class="input-group">
+                <p>2. 一<span class="blank">______</span>面包</p>
+                <p class="sentence-pinyin">yī ______ miàn bāo</p>
+                <input type="text" id="q9" placeholder="填写量词">
+            </div>
+            
+            <div class="input-group">
+                <p>3. 一<span class="blank">______</span>酸奶</p>
+                <p class="sentence-pinyin">yī ______ suān nǎi</p>
+                <input type="text" id="q10" placeholder="填写量词">
+            </div>
+            
+            <div class="input-group">
+                <p>4. 一<span class="blank">______</span>自行车</p>
+                <p class="sentence-pinyin">yī ______ zì xíng chē</p>
+                <input type="text" id="q11" placeholder="填写量词">
+            </div>
+            
+            <button class="btn" onclick="checkMeasureWords()">检查答案</button>
+            
+            <div id="feedback-measure" class="feedback"></div>
+        </div>
+    </div>
+
+    <!-- 综合练习 -->
+    <div class="section">
+        <h2><i>🧩</i> 综合练习</h2>
+        
+        <div class="exercise">
+            <h3>练习 4: 完成对话</h3>
+            <div class="input-group">
+                <p>A: 你<span class="blank">______</span>放学就回家？</p>
+                <p class="sentence-pinyin">nǐ ______ fàng xué jiù huí jiā？</p>
+                <input type="text" id="q12" placeholder="填写词语">
+            </div>
+            
+            <div class="input-group">
+                <p>B: 是的，因为我一回家就可以吃妈妈做的饭。</p>
+                <p class="sentence-pinyin">shì de, yīn wèi wǒ yī huí jiā jiù kě yǐ chī mā mā zuò de fàn。</p>
+            </div>
+            
+            <div class="input-group">
+                <p>A: 你昨天为什么没来上学？</p>
+                <p class="sentence-pinyin">nǐ zuó tiān wèi shén me méi lái shàng xué？</p>
+            </div>
+            
+            <div class="input-group">
+                <p>B: 因为我的自行车<span class="blank">______</span>偷走了。</p>
+                <p class="sentence-pinyin">yīn wèi wǒ de zì xíng chē ______ tōu zǒu le。</p>
+                <input type="text" id="q13" placeholder="填写词语">
+            </div>
+            
+            <div class="input-group">
+                <p>A: 图书馆在什么位置？</p>
+                <p class="sentence-pinyin">tú shū guǎn zài shén me wèi zhì？</p>
+            </div>
+            
+            <div class="input-group">
+                <p>B: 你一<span class="blank">______</span>校门就可以看见图书馆。</p>
+                <p class="sentence-pinyin">nǐ yī ______ xiào mén jiù kě yǐ kàn jiàn tú shū guǎn。</p>
+                <input type="text" id="q14" placeholder="填写词语">
+            </div>
+            
+            <button class="btn" onclick="checkDialogue()">检查答案</button>
+            
+            <div id="feedback-dialogue" class="feedback"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2023 三年级中文复习材料（拼音版） | 祝你学习进步！</p>
+    </div>
+
+    <script>
+        // 拼音显示控制
+        const toggleBtn = document.getElementById('togglePinyin');
+        let pinyinVisible = false;
+        
+        toggleBtn.addEventListener('click', function() {
+            pinyinVisible = !pinyinVisible;
+            const pinyinElements = document.querySelectorAll('.pinyin, .sentence-pinyin');
+            
+            if (pinyinVisible) {
+                pinyinElements.forEach(el => el.style.display = 'block');
+                toggleBtn.textContent = '隐藏拼音';
+            } else {
+                pinyinElements.forEach(el => el.style.display = 'none');
+                toggleBtn.textContent = '显示拼音';
+            }
+        });
+        
+        // 初始隐藏拼音
+        document.querySelectorAll('.pinyin, .sentence-pinyin').forEach(el => {
+            el.style.display = 'none';
+        });
+        
+        // 其他功能函数保持不变
+        function selectOption(element, inputId) {
+            let options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.backgroundColor = '#e6f7ff';
+                opt.style.borderColor = '#b3e0ff';
+            });
+            
+            element.style.backgroundColor = '#b3e0ff';
+            element.style.borderColor = '#4facfe';
+            document.getElementById(inputId).value = element.textContent;
+        }
+        
+        function checkPhrases() {
+            let feedback = document.getElementById('feedback-phrases');
+            let correctCount = 0;
+            let total = 4;
+            
+            if (document.getElementById('q1').value.toLowerCase() === '对我') {
+                markCorrect('q1');
+                correctCount++;
+            } else {
+                markIncorrect('q1', '正确答案: 对我');
+            }
+            
+            if (document.getElementById('q2').value.toLowerCase() === '对') {
+                markCorrect('q2');
+                correctCount++;
+            } else {
+                markIncorrect('q2', '正确答案: 对');
+            }
+            
+            if (document.getElementById('q3').value.toLowerCase() === '各种各样') {
+                markCorrect('q3');
+                correctCount++;
+            } else {
+                markIncorrect('q3', '正确答案: 各种各样');
+            }
+            
+            if (document.getElementById('q4').value.toLowerCase() === '吃完') {
+                markCorrect('q4');
+                correctCount++;
+            } else {
+                markIncorrect('q4', '正确答案: 吃完');
+            }
+            
+            feedback.style.display = 'block';
+            if (correctCount === total) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `太棒了！全部答对了！`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `你答对了 ${correctCount} 题，共 ${total} 题。继续加油！`;
+            }
+        }
+        
+        function checkGrammar() {
+            let feedback = document.getElementById('feedback-grammar');
+            let correctCount = 0;
+            let total = 3;
+            
+            if (document.getElementById('q5').value === '吵醒') {
+                markCorrect('q5');
+                correctCount++;
+            } else {
+                markIncorrect('q5', '正确答案: 吵醒');
+            }
+            
+            if (document.getElementById('q6').value === '被') {
+                markCorrect('q6');
+                correctCount++;
+            } else {
+                markIncorrect('q6', '正确答案: 被');
+            }
+            
+            if (document.getElementById('q7').value === '看见') {
+                markCorrect('q7');
+                correctCount++;
+            } else {
+                markIncorrect('q7', '正确答案: 看见');
+            }
+            
+            feedback.style.display = 'block';
+            if (correctCount === total) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `太棒了！全部答对了！`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `你答对了 ${correctCount} 题，共 ${total} 题。继续加油！`;
+            }
+        }
+        
+        function checkMeasureWords() {
+            let feedback = document.getElementById('feedback-measure');
+            let correctCount = 0;
+            let total = 4;
+            
+            if (document.getElementById('q8').value === '支') {
+                markCorrect('q8');
+                correctCount++;
+            } else {
+                markIncorrect('q8', '正确答案: 支');
+            }
+            
+            if (document.getElementById('q9').value === '块' || document.getElementById('q9').value === '片') {
+                markCorrect('q9');
+                correctCount++;
+            } else {
+                markIncorrect('q9', '正确答案: 块 或 片');
+            }
+            
+            if (document.getElementById('q10').value === '瓶' || document.getElementById('q10').value === '杯') {
+                markCorrect('q10');
+                correctCount++;
+            } else {
+                markIncorrect('q10', '正确答案: 瓶 或 杯');
+            }
+            
+            if (document.getElementById('q11').value === '辆') {
+                markCorrect('q11');
+                correctCount++;
+            } else {
+                markIncorrect('q11', '正确答案: 辆');
+            }
+            
+            feedback.style.display = 'block';
+            if (correctCount === total) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `太棒了！全部答对了！`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `你答对了 ${correctCount} 题，共 ${total} 题。继续加油！`;
+            }
+        }
+        
+        function checkDialogue() {
+            let feedback = document.getElementById('feedback-dialogue');
+            let correctCount = 0;
+            let total = 3;
+            
+            if (document.getElementById('q12').value === '一') {
+                markCorrect('q12');
+                correctCount++;
+            } else {
+                markIncorrect('q12', '正确答案: 一');
+            }
+            
+            if (document.getElementById('q13').value === '被') {
+                markCorrect('q13');
+                correctCount++;
+            } else {
+                markIncorrect('q13', '正确答案: 被');
+            }
+            
+            if (document.getElementById('q14').value === '进') {
+                markCorrect('q14');
+                correctCount++;
+            } else {
+                markIncorrect('q14', '正确答案: 进');
+            }
+            
+            feedback.style.display = 'block';
+            if (correctCount === total) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `太棒了！全部答对了！`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `你答对了 ${correctCount} 题，共 ${total} 题。继续加油！`;
+            }
+        }
+        
+        function markCorrect(inputId) {
+            document.getElementById(inputId).style.borderColor = '#4caf50';
+            document.getElementById(inputId).style.backgroundColor = '#e6ffe6';
+        }
+        
+        function markIncorrect(inputId, message) {
+            document.getElementById(inputId).style.borderColor = '#f44336';
+            document.getElementById(inputId).style.backgroundColor = '#ffe6e6';
+            document.getElementById(inputId).title = message;
+        }
+    </script>
+</body>
+</html>
